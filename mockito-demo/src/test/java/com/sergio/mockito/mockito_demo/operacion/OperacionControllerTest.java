@@ -9,11 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.sergio.mockito.mockito_demo.operacion.Multiplicacion;
-import com.sergio.mockito.mockito_demo.operacion.OperacionController;
-import com.sergio.mockito.mockito_demo.operacion.Resta;
-import com.sergio.mockito.mockito_demo.operacion.Suma;
-
 @ExtendWith(MockitoExtension.class)
 class OperacionControllerTest {
 	
