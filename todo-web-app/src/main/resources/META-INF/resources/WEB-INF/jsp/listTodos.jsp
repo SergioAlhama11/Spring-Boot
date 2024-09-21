@@ -1,13 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>List Todos Page</title>
-</head>
-<body>
-	<div>Welcome to TODO APP</div>
-	<div>Your Todos are: ${todos}</div>
-</body>
-</html>
+<%@ include file="common/header.jspf" %>
+<%@ include file="common/navigation.jspf" %>
+<div class="container">
+	<h1>Your TODO's</h1>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Description</th>
+				<th>Target Date</th>
+				<th>Is Done?</th>
+				<th>Created By</th>
+				<th/>
+				<th/>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${todos}" var="todo">
+				<tr>
+					<td>${todo.description}</td>
+					<td>${todo.targetDate}</td>
+					<td>${todo.done}</td>
+					<td>${todo.username}</td>
+					<td> <a href="delete-todo?id=${todo.id}" class="btn btn-danger">Delete</a></td>
+					<td> <a href="update-todo?id=${todo.id}" class="btn btn-primary">Update</a></td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	<a href="add-todo" class="btn btn-success">Add TODO</a>
+</div>
+
+<%@ include file="common/footer.jspf" %>
