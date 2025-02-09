@@ -1,4 +1,4 @@
-package com.sergio.springboot.todo_web_app.security;
+package com.sergio.springboot.first_rest_api.security;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -16,17 +16,11 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SpringSecurityConfiguration {
-	
-	//LDAP or Database
-	//In memory
 
-	//InMemoryUserDetailsManager
-	//InMemoryUserDetailsManager(UserDetails... users)
-	
 	@Bean
 	public InMemoryUserDetailsManager createUserDetailsManager() {
 		UserDetails userDetails1 = createNewUser("admin", "admin");
-		UserDetails userDetails2 = createNewUser("Sergio", "sergio123");
+		UserDetails userDetails2 = createNewUser("sergio", "sergio");
 		
 		return new InMemoryUserDetailsManager(userDetails1, userDetails2);
 	}
@@ -57,13 +51,12 @@ public class SpringSecurityConfiguration {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		
 		http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated()); // Para autorizar cada peticion Http
-		http.formLogin(withDefaults()); // Mostrar un formulario de login
+		http.httpBasic(withDefaults());
 		
-		http.csrf((csrf) -> csrf.disable());
-		http.headers((headers) -> headers.frameOptions((frameOptions) -> frameOptions.disable()));
+		http.csrf((csrf) -> csrf.disable()); // Lo desactivamos porque puede dar problema a la hora de usar metodos POST o PUT
+		http.headers((headers) -> headers.frameOptions((frameOptions) -> frameOptions.disable())); // Lo desactivamos tambien
 		
 		return http.build();
 		
 	}
-	
 }
